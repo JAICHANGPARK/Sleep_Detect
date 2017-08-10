@@ -166,3 +166,38 @@ void displayTime_LCD()
       break;
   }
 }
+
+String DateLogEntry(){
+  
+  String s_dateEntry;
+  String s_year;
+  String s_month;
+  String s_day;
+  String s_hour;
+  String s_minute;
+
+  byte second, minute, hour, dayOfWeek, dayOfMonth, month, year;
+  read_time(&second, &minute, &hour, &dayOfWeek, &dayOfMonth, &month, &year);
+
+  s_year = String(year);
+  s_month = String(month);
+  s_day = String(dayOfMonth);
+
+  if (hour < 10){
+    s_hour = "0" + String(hour);
+  } else{
+    s_hour = String(hour);
+  }
+
+  if (minute < 10){
+    s_minute = "0" + String(minute);
+  } else{
+    s_minute = String(minute);
+  }
+
+  s_dateEntry = s_month + "/" + s_day + "/" + s_year + " " + s_hour + ":" + s_minute;
+  
+  return s_dateEntry;
+}
+
+
