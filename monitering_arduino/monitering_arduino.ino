@@ -1,4 +1,3 @@
-
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 
@@ -18,6 +17,9 @@ int INTERVAL = 1; //interval of measurements in minutes
 int id = 0;
 
 SENSOR_DATA sensor_data;
+
+float Humi = 0.0F;
+float Temp = 0.0F;
 
 void setup() {
 
@@ -48,11 +50,14 @@ void loop() {
   String s_Heart_Rate = String(sensor_data.HEART_RATE);
   String s_SPO2 = String(sensor_data.SPO2);
   String s_SOUND = String(sensor_data.SOUND);
+  
+  String s_Temp = String(read_temp(Temp));
+  String s_Humi = String(read_humi(Humi));
 
   displayTime_LCD(); // display the real-time clock data on the Serial Monitor,
 
   dateEntry = DateLogEntry();
-  entry = entry + "," + dateEntry + "," + s_Heart_Rate + "," + s_SPO2 + "," +  s_SOUND;
+  entry = entry + "," + dateEntry + "," + s_Heart_Rate + "," + s_SPO2 + "," +  s_SOUND + "," + s_Temp + "," + s_Humi;
   writeEntryToFile(entry);
   delay(2000);
   sleepForMinutes(INTERVAL);
