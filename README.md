@@ -1,5 +1,5 @@
 # Sleep_Detect
-20170810 test ok
+2017-08-12 Test Done!!!!!
 
 # Hardware
 
@@ -8,8 +8,13 @@
 3. FRAM : MB85RC256V ( Manuf : Fujitsu ) 
 4. SD Card
 
+# Version 1.0.2 
 
-### License
+Added SHT-20 Temp/Humi MEMS Sensor code!! 
+now We can save data Temperature and Humi when we Sleep..
+
+
+## License
 
 ```
 The MIT License (MIT)
