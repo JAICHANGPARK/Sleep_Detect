@@ -6,6 +6,7 @@ uint16_t readSHT20(uint8_t address){
   uint16_t result;
   Wire.beginTransmission(0x40);
   Wire.write(address);
+  delay(20);
   Wire.endTransmission();
   
   Wire.requestFrom(0x40,3);

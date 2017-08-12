@@ -1,7 +1,9 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
+#include <SoftwareSerial.h>
 
 LiquidCrystal_I2C lcd(0x3F, 16, 2);
+SoftwareSerial mySerial(2, 3); // RX, TX
 
 typedef struct SENSOR_DATA {
 
@@ -16,18 +18,20 @@ uint8_t value = 0;
 int INTERVAL = 1; //interval of measurements in minutes
 int id = 0;
 
-SENSOR_DATA sensor_data;
-
 float Humi = 0.0F;
 float Temp = 0.0F;
 
+SENSOR_DATA sensor_data;
+
 void setup() {
 
-  lcd.begin();
+  
   Serial.begin(9600);
   Serial.println("Sleep Monitering System");
-  lcd.backlight();
+  mySerial.begin(9600);
 
+  lcd.begin();
+  lcd.backlight();
   lcd.setCursor(0, 0); //Start at character 4 on line 0
   lcd.print("SleepMonitering");
   delay(1000);
@@ -59,6 +63,7 @@ void loop() {
   dateEntry = DateLogEntry();
   entry = entry + "," + dateEntry + "," + s_Heart_Rate + "," + s_SPO2 + "," +  s_SOUND + "," + s_Temp + "," + s_Humi;
   writeEntryToFile(entry);
+  
   delay(2000);
   sleepForMinutes(INTERVAL);
 
