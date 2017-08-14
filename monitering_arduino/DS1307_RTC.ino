@@ -58,57 +58,13 @@ void read_time(byte *second, byte *minute, byte *hour,
   *month = bcdToDec(Wire.read());
   *year = bcdToDec(Wire.read());
 }
-void displayTime_Serial()
-{
-  byte second, minute, hour, dayOfWeek, dayOfMonth, month, year;
-  read_time(&second, &minute, &hour, &dayOfWeek, &dayOfMonth, &month, &year);
-  Serial.print(hour, DEC);
-  Serial.print(":");
-  if (minute < 10) {
-    Serial.print("0");
-  }
-  Serial.print(minute, DEC);
-  Serial.print(":");
-  if (second < 10) {
-    Serial.print("0");
-  }
-  Serial.print(second, DEC);
-  Serial.print(" ");
-  Serial.print(dayOfMonth, DEC);
-  Serial.print("/");
-  Serial.print(month, DEC);
-  Serial.print("/");
-  Serial.print(year, DEC);
-  Serial.print(" Day of week: ");
-  switch (dayOfWeek) {
-    case 1:
-      Serial.println("Sunday");
-      break;
-    case 2:
-      Serial.println("Monday");
-      break;
-    case 3:
-      Serial.println("Tuesday");
-      break;
-    case 4:
-      Serial.println("Wednesday");
-      break;
-    case 5:
-      Serial.println("Thursday");
-      break;
-    case 6:
-      Serial.println("Friday");
-      break;
-    case 7:
-      Serial.println("Saturday");
-      break;
-  }
-}
 
 void displayTime_LCD()
 {
   byte second, minute, hour, dayOfWeek, dayOfMonth, month, year;
   read_time(&second, &minute, &hour, &dayOfWeek, &dayOfMonth, &month, &year);
+
+  lcd.clear();
 
   lcd.setCursor(0, 0);
   lcd.print(hour);
@@ -165,4 +121,39 @@ void displayTime_LCD()
       lcd.print("SAT");
       break;
   }
+}
+
+String DateLogEntry() {
+
+  String s_dateEntry;
+  String s_year;
+  String s_month;
+  String s_day;
+  String s_hour;
+  String s_minute;
+  String s_second;
+
+  byte second, minute, hour, dayOfWeek, dayOfMonth, month, year;
+  read_time(&second, &minute, &hour, &dayOfWeek, &dayOfMonth, &month, &year);
+
+  s_year = String(year);
+  s_month = String(month);
+  s_day = String(dayOfMonth);
+
+  if (hour < 10) {
+    s_hour = "0" + String(hour);
+  } else {
+    s_hour = String(hour);
+  }
+
+  if (minute < 10) {
+    s_minute = "0" + String(minute);
+  } else {
+    s_minute = String(minute);
+  }
+  s_second = String(second);
+
+  s_dateEntry = s_year + "/" + s_month + "/" + s_day + " " + s_hour + ":" + s_minute + ":" + s_second;
+
+  return s_dateEntry;
 }
