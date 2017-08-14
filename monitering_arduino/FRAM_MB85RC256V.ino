@@ -52,7 +52,7 @@ uint8_t FRAM_Read_Byte (uint16_t framAddr)
   Wire.endTransmission();
 
   Wire.requestFrom(i2c_addr, (uint8_t)1);
-  
+
   return Wire.read();
 }
 

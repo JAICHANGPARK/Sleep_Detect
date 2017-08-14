@@ -1,5 +1,9 @@
 # Sleep_Detect
-20170810 test ok
+20170814 test Done
+
+# Test Device 
+1. arduino UNO
+2. arduino Mega
 
 # Hardware
 
@@ -8,6 +12,13 @@
 3. FRAM : MB85RC256V ( Manuf : Fujitsu ) 
 4. SD Card
 
+# Lib
+
+you need to install some lib using this project code.
+1. [LiquidCrystal_I2C](https://github.com/fdebrabander/Arduino-LiquidCrystal-I2C-library)
+2. [Adafruit_GFX](https://github.com/adafruit/Adafruit-GFX-Library)
+3. [Adafruit_PCD8544](https://github.com/adafruit/Adafruit-PCD8544-Nokia-5110-LCD-library)
+4. [LowPower](https://github.com/rocketscream/Low-Power)
 
 ### License
 
